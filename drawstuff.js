@@ -182,7 +182,7 @@ function main() {
     // do the interpolation
     for (var y=uly; y<=lly; y++) {
         hc.copy(lc); // begin with the left color
-        var slope = Math.ceil((uly - lry) / (ulx - lrx))
+        var slope = Math.ceil((lry - uly) / (lrx - ulx))
         hcDelta.copy(rc).subtract(lc).scale(hDelta); // reset horiz color delta
         for (var x=ulx; x<=slope; x++) {
             drawPixel(imagedata,x,y,hc);   
