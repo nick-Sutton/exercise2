@@ -159,10 +159,10 @@ function main() {
  
     // Define a rectangle in 2D with colors and coords at corners
     var ulc = new Color(0,255,255,255); // upper left corner color: Cyan
-    var urc = new Color(255,0,255,255); // upper right corner color: Magenta
+    var urc = new Color(255, 0, 255, 255) // upper right color: Magenta
     var llc = new Color(255,255,0,255); // lower left corner color: Yellow
     var lrc = new Color(255,192,203,255); // lower right corner color: Pink
-    var ulx = 50, uly = 50; // upper left corner position
+    var ulx = 50, upy = 50; // upper left corner position
     var urx = 200, ury = 50; // upper right corner position
     var llx = 50, lly = 150; // lower left corner position
     var lrx = 200, lry = 150; // lower right corner position
@@ -182,9 +182,10 @@ function main() {
     // do the interpolation
     for (var y=uly; y<=lly; y++) {
         hc.copy(lc); // begin with the left color
+        var slope = (uly - lry) / (ulx - lrx)
         hcDelta.copy(rc).subtract(lc).scale(hDelta); // reset horiz color delta
-        for (var x=ulx; x<=urx; x++) {
-            drawPixel(imagedata,x,y,hc);
+        for (var x=ulx; x<=slope; x++) {
+            drawPixel(imagedata,x,y,hc);   
             hc.add(hcDelta);
         } // end horizontal
         lc.add(lcDelta);
