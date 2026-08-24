@@ -178,13 +178,14 @@ function main() {
     var hc = new Color(); // horizontal color
     var hDelta = 1 / (urx-ulx); // norm'd horizontal delta
     var hcDelta = new Color(); // horizontal color delta
+
+     var slope = Math.ceil((lry - uly) / (lrx - ulx))
     
     // do the interpolation
     for (var y=uly; y<=lly; y++) {
         hc.copy(lc); // begin with the left color
-        var slope = Math.ceil((lry - uly) / (lrx - ulx))
         hcDelta.copy(rc).subtract(lc).scale(hDelta); // reset horiz color delta
-        for (var x=ulx; x<=slope; x++) {
+        for (var x=ulx; x<= (y / slope); x++) {
             drawPixel(imagedata,x,y,hc);   
             hc.add(hcDelta);
         } // end horizontal
